@@ -34,19 +34,23 @@
     </td>
   </tr>
 
+    <% @users.each do |individual_user| %>
+
     <tr>
       <td>
-        117
+        <%= individual_user.id %>
       </td>
 
       <td>
-        anisa
+        <%= individual_user.username %>
       </td>
 
       <td>
-        <a href="/users/anisa">
+        <a href="/users/<%= individual_user.username %>">
           Show details
         </a>
       </td>
     </tr>
+
+    <% end %>
   </table>

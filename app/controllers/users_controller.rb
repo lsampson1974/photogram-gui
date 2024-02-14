@@ -21,4 +21,30 @@ class UsersController < ApplicationController
     
     end # Of method.
 
+
+#----------------------------------
+
+    def update_user
+
+        user_id = params["user_id"]
+        updated_username = params["input_username"]
+
+        @the_user = User.find(user_id)
+
+        @the_user.username = updated_username
+
+        if @the_user.valid?
+            @the_user.save
+            redirect_to("/users/#{@the_user.username}", { :notice => "User updated successfully."} )
+        end
+
+
+    end # Of method.
+
+#----------------------------------
+
+
+
+
+
 end # Of class.

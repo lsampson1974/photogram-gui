@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
     get("/users", { :controller => "users", :action => "list_all_users" })
 
+    post("/add_user", { :controller => "users", :action => "insert_user" })
+
     get("/users/:username", { :controller => "users", :action => "show_individual_user" })
 
     post("/update_user/:user_id", { :controller => "users", :action => "update_user" })

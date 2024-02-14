@@ -24,6 +24,8 @@ class UsersController < ApplicationController
 
 #----------------------------------
 
+
+
     def update_user
 
         user_id = params["user_id"]
@@ -40,6 +42,26 @@ class UsersController < ApplicationController
 
 
     end # Of method.
+
+#----------------------------------
+
+def insert_user
+
+    new_user = User.new
+
+    new_user.username = params.fetch("input_username")
+
+    if new_user.valid?
+       new_user.save
+    end
+
+    @users = User.all.order({ :username => :asc })
+
+    render({ :template => "users/users_list" })
+
+
+ end # Of method.
+
 
 #----------------------------------
 

@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     
     get("/photos/:photo_id", { :controller => "photos", :action => "show_individual_photo" })    
 
-    post("/insert_photo_record", { :controller => "photos", :action => "insert_photo" }))
+    post("/insert_photo_record", { :controller => "photos", :action => "insert_photo" })
+
+    post("/add_comment", { :controller => "photos", :action => "insert_comment" })
 
 end

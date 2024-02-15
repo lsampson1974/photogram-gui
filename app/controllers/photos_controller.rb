@@ -46,8 +46,8 @@ class PhotosController < ApplicationController
         @individual_photo = new_photo 
      end
 
-     render({ :template => "photos/individual_photos" })
-
+     #render({ :template => "photos/individual_photos" })
+     redirect_to("/photos/#{new_photo.id}", { :notice => "Photo deleted successfully."} )
 
   end # Of method.
 
@@ -68,7 +68,8 @@ class PhotosController < ApplicationController
       @individual_photo = photo_to_update
    end
 
-    render({ :template => "photos/individual_photos" })   
+    #render({ :template => "photos/individual_photos" })  
+    redirect_to("/photos/#{photo_id}", { :notice => "Photo deleted successfully."} ) 
 
   end # Of method.
 
@@ -100,7 +101,8 @@ class PhotosController < ApplicationController
       @individual_photo = Photo.where({ :id => new_comment.photo_id }).first
    end
 
-   render({ :template => "photos/individual_photos" })
+   #render({ :template => "photos/individual_photos" })
+   redirect_to("/photos/#{new_comment.photo_id}", { :notice => "Photo deleted successfully."} ) 
 
 end # Of method.
 

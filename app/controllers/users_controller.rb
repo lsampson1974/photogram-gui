@@ -53,11 +53,15 @@ def insert_user
 
     if new_user.valid?
        new_user.save
+       @individual_user = new_user
+       
     end
 
-    @users = User.all.order({ :username => :asc })
 
-    render({ :template => "users/users_list" })
+    @user_param = new_user.username
+
+
+    redirect_to("/users/#{@user_param}", { :notice => "User updated successfully."} )
 
 
  end # Of method.

@@ -22,7 +22,7 @@
 
   belongs_to(:photo, class_name: "Photo", foreign_key: "photo_id")
 
-
+=begin
 class Comment < ApplicationRecord
   validates(:commenter, { :presence => true })
 
@@ -35,4 +35,7 @@ class Comment < ApplicationRecord
 
     return the_user
   end
+
+=end
+
 end

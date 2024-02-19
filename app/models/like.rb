@@ -16,6 +16,14 @@ class Like < ApplicationRecord
     :uniqueness => { :scope => [:fan_id] }
   })
 
+# Like#fan: returns a row from the users table associated to this like by the fan_id column
+belongs_to(:fan, class_name: "Users", foreign_key: "fan_id")
+
+
+# Like#photo: returns a row from the photo table associated to this like by the photo_id column
+belongs_to(:photo, class_name: "Photo", foreign_key: "photo_id")
+
+
   def fan
     my_fan_id = self.fan_id
 

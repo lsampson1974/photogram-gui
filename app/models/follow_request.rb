@@ -10,6 +10,16 @@
 #  sender_id    :integer
 #
 
+# FollowRequest#sender: returns a row from the users table associated to this follow request by the sender_id column
+belongs_to(:sender, class_name: "Users", foreign_key: "sender_id")
+
+
+
+# FollowRequest#recipient: returns a row from the users table associated to this follow request by the recipient_id column
+belongs_to(:recipient, class_name: "Users", foreign_key: "recipient_id")
+
+
+
 class FollowRequest < ApplicationRecord
   validates(:sender, { :presence => true})
   validates(:recipient, { :presence => true })
@@ -17,7 +27,7 @@ class FollowRequest < ApplicationRecord
     :uniqueness => { :scope => [:sender_id] }
   })
 
-  def sender
+=begin def sender
     my_sender_id = self.sender_id
 
     matching_users = User.where({ :id => my_sender_id })
@@ -36,4 +46,7 @@ class FollowRequest < ApplicationRecord
 
     return the_user
   end
+
+=end
+
 end

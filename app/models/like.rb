@@ -44,5 +44,5 @@ belongs_to(:photo, class_name: "Photo", foreign_key: "photo_id")
 
     return the_photo
   end
+  =end
 end
-=end

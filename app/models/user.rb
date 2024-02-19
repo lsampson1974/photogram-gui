@@ -17,6 +17,62 @@ class User < ApplicationRecord
     :uniqueness => { :case_sensitive => false },
   })
 
+  # User#comments: returns rows from the comments table associated to this user by the author_id column
+  has_many(:comments, class_name: "Comment", foreign_key: "author_id")
+
+   # User#own_photos: returns rows from the photos table  associated to this user by the owner_id column
+   has_many(:own_photos, class_name:"Photos", foreign_key: "owner_id")
+
+  # User#likes: returns rows from the likes table associated to this user by the fan_id column
+  has_many(:likes, class_name:"Likes", foreign_key: "fan_id")
+
+ # User#sent_follow_requests: returns rows from the follow requests table associated to this user by the sender_id column
+has_many(:sent_follow_requests, class_name: "FollowRequests", foreign_key: "sender_id")
+
+# User#received_follow_requests: returns rows from the follow requests table associated to this user by the recipient_id column
+has_many(:recieved_follow_requests, class_name: "FollowRequests", foreign_key: "recipient_id")
+
+
+# User#accepted_sent_follow_requests: returns rows from the follow requests table associated to this user by the sender_id column, where status is 'accepted'
+has_many(:accepted_sent_follow_requests, -> { where status: "accepted" }, class_name: "FollowRequests", foreign_key: "recipient_id")
+
+# User#accepted_received_follow_requests: returns rows from the follow requests table associated to this user by the recipient_id column, where status is 'accepted'
+has_many(:accepted_received_follow_requests, -> { where status: "accepted" }, class_name: "FollowRequests", foreign_key: "recipient_id")
+
+
+# User#liked_photos: returns rows from the photos table associated to this user through its likes
+has_many(:liked_photos)
+has_many(:liked_photos, through: :likes)
+
+
+
+# User#commented_photos: returns rows from the photos table associated to this user through its comments
+has_many(:commented_photos)
+has_many(:commented_photos, through: :comments)
+
+
+# User#followers: returns rows from the users table associated to this user through its accepted_received_follow_requests (the follow requests' senders)
+has_many(:followers)
+has_many(:followers, through: :accepted_received_follow_requests)
+
+
+
+# User#leaders: returns rows from the users table associated to this user through its accepted_sent_follow_requests (the follow requests' recipients)
+has_many(:followers)
+has_many(:followers, through: :accepted_send_follow_requests)
+
+
+
+
+# User#feed: returns rows from the photos table associated to this user through its leaders (the leaders' own_photos)
+has_many(:feed)
+has_many(:feed, through: :leader_own_photos)
+
+# User#discover: returns rows from the photos table associated to this user through its leaders (the leaders' liked_photos)
+has_many(:discover)
+has_many(:discover, through: :leader_liked_photos)
+
+=begin
   def comments
     my_id = self.id
 
@@ -166,4 +222,7 @@ class User < ApplicationRecord
 
     return matching_photos
   end
+
+=end
+
 end
